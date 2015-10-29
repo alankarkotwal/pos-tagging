@@ -1,6 +1,6 @@
 clear; clc;
 
-filename = 'pos.train.subs.txt';
+filename = 'pos.train.txt';
 
 fid = fopen(filename);
 
@@ -87,13 +87,17 @@ while ischar(tline)
 
     end
     
+    myTrans(mySymMap(oldSym), mySymMap('START')) = myTrans(mySymMap(oldSym), mySymMap('START')) + 1;
+    
     lineCount = lineCount + 1;
     
 end
 
-myTrans = myTrans + 0.01;
-myTrans = myTrans ./ repmat(sum(myTrans, 2), 1, size(myTrans, 2));
+myEmis(1, 1) = lineCount - 1;
 
-myEmis = myEmis ./ repmat(sum(myEmis, 2), 1, size(myEmis, 2));
+% myTrans = myTrans + 0.01;
+% myTrans = myTrans ./ repmat(sum(myTrans, 2), 1, size(myTrans, 2));
+
+% myEmis = myEmis ./ repmat(sum(myEmis, 2), 1, size(myEmis, 2));
 
 fclose(fid);
