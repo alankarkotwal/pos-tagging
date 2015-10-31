@@ -23,6 +23,10 @@ mySymInvMap{symCount} = 'START';
 wordCount = wordCount + 1;
 symCount = symCount + 1;
 
+myWordMap('__UNK__') = wordCount;
+myWordInvMap{wordCount} = '__UNK__';
+wordCount = wordCount + 1;
+
 while ischar(tline)
     
     disp([1 lineCount]);
@@ -60,7 +64,7 @@ end
 fclose(fid);
 
 myTrans = zeros(symCount-1, symCount-1);
-myEmis = zeros(symCount - 1, wordCount - 1);
+myEmis = zeros(symCount - 1, wordCount);
 
 fid = fopen(filename);
 tline = '';
@@ -95,9 +99,11 @@ end
 
 myEmis(1, 1) = lineCount - 1;
 
-% myTrans = myTrans + 0.01;
-% myTrans = myTrans ./ repmat(sum(myTrans, 2), 1, size(myTrans, 2));
+myTrans = myTrans + 0.01;
+myTrans = myTrans ./ repmat(sum(myTrans, 2), 1, size(myTrans, 2));
 
-% myEmis = myEmis ./ repmat(sum(myEmis, 2), 1, size(myEmis, 2));
+myEmis = myEmis ./ repmat(sum(myEmis, 2), 1, size(myEmis, 2));
+myEmis(:, myWordMap('__UNK__')) = 0.0001*[0; ones(symCount - 2, 1)];
+myEmis = myEmis ./ repmat(sum(myEmis, 2), 1, size(myEmis, 2));
 
 fclose(fid);

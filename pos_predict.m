@@ -7,7 +7,7 @@ function statesOut = pos_predict(x, myTrans, myEmis, myWordMap, mySymInvMap)
         try
             seq(i) = myWordMap(lower(x{i}));
         catch
-            error('Unknown word encountered!');
+            seq(i) = myWordMap('__UNK__');
         end
         
     end
