@@ -8,6 +8,7 @@ tline = '';
 
 lineCount = 1;
 
+% Define hashmaps
 myWordMap = containers.Map;
 mySymMap = containers.Map;
 myWordInvMap = {};
