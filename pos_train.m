@@ -28,6 +28,7 @@ myWordMap('__UNK__') = wordCount;
 myWordInvMap{wordCount} = '__UNK__';
 wordCount = wordCount + 1;
 
+% Training the HMM
 while ischar(tline)
     
     disp([1 lineCount]);
